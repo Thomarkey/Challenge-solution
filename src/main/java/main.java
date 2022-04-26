@@ -97,6 +97,7 @@ public class main {
             }
         }
 
+        //visual confirmation
         for (String word : solutionList) {
             System.out.println(word);
         }
