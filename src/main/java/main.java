@@ -3,55 +3,36 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class main {
 
-
-//    static final int wordLengthToCheck = 6;
-//    static final String fileName = "input.txt";
-
     static int currentWordLength;
     static String currentWord;
     static String candidateWord;
     static String candidateWordBackwards;
 
+    static List<String> originalWordList = new ArrayList<>();
     static List<String> solutionList = new ArrayList<>();
     static List<String> wordList = new ArrayList<>();
 //    static List<String> tempWordList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
+        Map<String, String> input = InputHelper.askInput();
 
-        //mimic file upload and TODO: add validation (.txt file for example)
-        System.out.println("Enter attached filename");
-        String fileName = scanner.nextLine();
-
-        int wordLengthToCheck;
-        do {
-            System.out.println("Enter a positive numeric wordlength to check");
-            while (!scanner.hasNextInt()) {
-                System.out.println("That's not a number!");
-                System.out.println("Enter a positive numeric wordlength to check");
-                scanner.next();
-            }
-            wordLengthToCheck = scanner.nextInt();
-        } while (wordLengthToCheck < 0);
-
+        String fileName = input.get("fileName");
+        int wordLengthToCheck = Integer.parseInt(input.get("wordLengthToCheck"));
 
         System.out.println("Solution: ");
         returnSolution(fileName, wordLengthToCheck);
     }
 
     public static void returnSolution(String fileName, int wordLengthToCheck) throws IOException {
-        //create new list and add words read from .txtfile
-        List<String> originalWordList = new ArrayList<>();
-
-        //assert that file is not empty
-        assertThat(Path.of(fileName)).isNotEmptyFile();
+//        //create new list and add words read from .txtfile
+        //fill list with words read from input file
         Files.lines(Path.of(fileName))
                 .filter(word -> !word.isEmpty())
                 .forEach(originalWordList::add);
