@@ -42,7 +42,6 @@ public class main {
         //create new list and add words read from .txtfile
         List<String> originalWordList = new ArrayList<>();
 
-
         //assert that file is not empty
         assertThat(Path.of(fileName)).isNotEmptyFile();
         Files.lines(Path.of(fileName))
