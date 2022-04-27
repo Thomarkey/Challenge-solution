@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class main {
 
 
-    static final int wordLengthToCheck = 6;
-    static final String fileName = "input.txt";
+//    static final int wordLengthToCheck = 6;
+//    static final String fileName = "input.txt";
 
     static int currentWordLength;
     static String currentWord;
@@ -23,7 +24,21 @@ public class main {
 //    static List<String> tempWordList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
+        Scanner myObj = new Scanner(System.in);
 
+        //mimic file upload and TODO: add validation (.txt file for example)
+        System.out.println("Enter attached filename");
+        String fileName = myObj.nextLine();
+
+        //TODO: make sure input is a number and > 0
+        System.out.println("Enter numeric wordlength to check");
+        int wordLengthToCheck = Integer.parseInt(myObj.nextLine());
+
+        System.out.println("Solution: ");
+        returnSolution(fileName, wordLengthToCheck);
+    }
+
+    public static void returnSolution(String fileName, int wordLengthToCheck) throws IOException {
         //create new list and add words read from .txtfile
         List<String> originalWordList = new ArrayList<>();
 
