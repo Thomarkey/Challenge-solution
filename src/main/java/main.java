@@ -24,15 +24,23 @@ public class main {
 //    static List<String> tempWordList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-        Scanner myObj = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         //mimic file upload and TODO: add validation (.txt file for example)
         System.out.println("Enter attached filename");
-        String fileName = myObj.nextLine();
+        String fileName = scanner.nextLine();
 
-        //TODO: make sure input is a number and > 0
-        System.out.println("Enter numeric wordlength to check");
-        int wordLengthToCheck = Integer.parseInt(myObj.nextLine());
+        int wordLengthToCheck;
+        do {
+            System.out.println("Enter a positive numeric wordlength to check");
+            while (!scanner.hasNextInt()) {
+                System.out.println("That's not a number!");
+                System.out.println("Enter a positive numeric wordlength to check");
+                scanner.next();
+            }
+            wordLengthToCheck = scanner.nextInt();
+        } while (wordLengthToCheck < 0);
+
 
         System.out.println("Solution: ");
         returnSolution(fileName, wordLengthToCheck);
@@ -112,11 +120,13 @@ public class main {
         }
 
         //visual confirmation
-        for (String word : solutionList) {
-            System.out.println(word);
+        if (!solutionList.isEmpty()) {
+            for (String word : solutionList) {
+                System.out.println(word);
+            }
+        } else {
+            System.out.println("no solutions available!");
         }
 
     }
-
-
 }
